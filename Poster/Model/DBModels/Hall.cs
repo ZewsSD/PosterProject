@@ -1,19 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 #nullable disable
 
 namespace Poster.Model.DBModels
 {
-    public partial class Hall : IReadOnlyHall
+    public partial class Hall : IReadOnlyHall, INotifyPropertyChanged
     {
-        public int Id { get; private set; }
-        public int? PlacesInLine { get; private set; }
-        public int? CinemaId { get; private set; }
-        public int? CountLine { get; private set; }
+        private int _id;
+        private int? _placesInLine;
+        private int? _cinemaId;
+        private int? _countLine;
+        private Cinema _cinema;
+        private ICollection<Session> _sessions;
 
-        public virtual Cinema Cinema { get; private set; }
-        public virtual ICollection<Session> Sessions { get; private set; }
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+        public int? PlacesInLine
+        {
+            get => _placesInLine;
+            set
+            {
+                _placesInLine = value;
+                OnPropertyChanged(nameof(PlacesInLine));
+            }
+        }
+        public int? CinemaId
+        {
+            get => _cinemaId;
+            set
+            {
+                _cinemaId = value;
+                OnPropertyChanged(nameof(CinemaId));
+            }
+        }
+        public int? CountLine
+        {
+            get => _countLine;
+            set
+            {
+                _countLine = value;
+                OnPropertyChanged(nameof(CountLine));
+            }
+        }
+
+        public virtual Cinema Cinema
+        {
+            get => _cinema;
+            set
+            {
+                _cinema = value;
+                OnPropertyChanged(nameof(Cinema));
+            }
+        }
+        public virtual ICollection<Session> Sessions
+        {
+            get => _sessions;
+            set
+            {
+                _sessions = value;
+                OnPropertyChanged(nameof(Sessions));
+            }
+        }
 
         public Hall(int placesInLine, int cinemaId, int countLine)
         {
@@ -23,6 +80,11 @@ namespace Poster.Model.DBModels
 
             Sessions = new HashSet<Session>();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = " ") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public void Update(int placesInLine, int cinemaId, int countLine)
         {

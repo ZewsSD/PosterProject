@@ -1,20 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 #nullable disable
 
 namespace Poster.Model.DBModels
 {
-    public partial class Session : IReadOnlySession
+    public partial class Session : IReadOnlySession, INotifyPropertyChanged
     {
-        public int Id { get; private set; }
-        public int? MovieId { get; private set; }
-        public DateTime? Date { get; private set; }
-        public int? HallId { get; private set; }
+        private int _id;
+        private int? _movieId;
+        private DateTime? _date;
+        private int? _hallId;
+        private Hall _hall;
+        private Movie _movie;
+        private ICollection<Ticket> _tickets;
 
-        public virtual Hall Hall { get; private set; }
-        public virtual Movie Movie { get; private  set; }
-        public virtual ICollection<Ticket> Tickets { get; private set; }
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+        public int? MovieId
+        {
+            get => _movieId;
+            set
+            {
+                _movieId = value;
+                OnPropertyChanged(nameof(MovieId));
+            }
+        }
+        public DateTime? Date
+        {
+            get => _date;
+            set
+            {
+                _date = value;
+                OnPropertyChanged(nameof(Date));
+            }
+        }
+        public int? HallId
+        {
+            get => _hallId;
+            set
+            {
+                _hallId = value;
+                OnPropertyChanged(nameof(HallId));
+            }
+        }
+
+        public virtual Hall Hall
+        {
+            get => _hall;
+            set
+            {
+                _hall = value;
+                OnPropertyChanged(nameof(Hall));
+            }
+        }
+        public virtual Movie Movie
+        {
+            get => _movie;
+            set
+            {
+                _movie = value;
+                OnPropertyChanged(nameof(Movie));
+            }
+        }
+        public virtual ICollection<Ticket> Tickets
+        {
+            get => _tickets;
+            set
+            {
+                _tickets = value;
+                OnPropertyChanged(nameof(Tickets));
+            }
+        }
 
         public Session(DateTime date, int movieId, int hallId)
         {
@@ -24,6 +90,11 @@ namespace Poster.Model.DBModels
 
             Tickets = new HashSet<Ticket>();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = " ") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public void Update(DateTime date, int movieId, int hallId)
         {
