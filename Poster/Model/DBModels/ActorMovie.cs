@@ -1,24 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 #nullable disable
 
 namespace Poster.Model.DBModels
 {
-    public partial class ActorMovie : IReadOnlyActorMovie
+    public partial class ActorMovie : IReadOnlyActorMovie, INotifyPropertyChanged
     {
-        public int Id { get; private set; }
-        public int? ActorId { get; private set; }
-        public int? MovieId { get; private set; }
+        private int _id;
+        private int? _actorId;
+        private int? _movieId;
+        private Actor _actor;
+        private Movie _movie;
 
-        public virtual Actor Actor { get; set; }
-        public virtual Movie Movie { get; set; }
-        
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+        public int? ActorId
+        {
+            get => _actorId;
+            set
+            {
+                _actorId = value;
+                OnPropertyChanged(nameof(ActorId));
+            }
+        }
+        public int? MovieId
+        {
+            get => _movieId;
+            set
+            {
+                _movieId = value;
+                OnPropertyChanged(nameof(MovieId));
+            }
+        }
+
+        public virtual Actor Actor
+        {
+            get => _actor;
+            set
+            {
+                _actor = value;
+                OnPropertyChanged(nameof(Actor));
+            }
+        }
+        public virtual Movie Movie
+        {
+            get => _movie;
+            set
+            {
+                _movie = value;
+                OnPropertyChanged(nameof(Movie));
+            }
+        }
+
         public ActorMovie(int actorId, int movieId)
         {
             ActorId = actorId;
             MovieId = movieId;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = " ") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public void Update(int actorId, int movieId)
         {

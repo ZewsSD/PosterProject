@@ -1,20 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 #nullable disable
 
 namespace Poster.Model.DBModels
 {
-    public partial class Cinema : IReadOnlyCinema
+    public partial class Cinema : IReadOnlyCinema, INotifyPropertyChanged
     {
-        public int Id { get; private set; }
-        public TimeSpan? WorkTime { get; private set; }
-        public string Title { get; private set; }
-        public string Address { get; private set; }
+        private int _id;
+        private TimeSpan? _workTime;
+        private string _title;
+        private string _address;
+        private ICollection<City> _cities;
+        private ICollection<Hall> _halls;
 
-        public virtual ICollection<City> Cities { get; private set; }
-        public virtual ICollection<Hall> Halls { get; private set; }
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(Id));
+            }
+        }
+        public TimeSpan? WorkTime
+        {
+            get => _workTime;
+            set
+            {
+                _workTime = value;
+                OnPropertyChanged(nameof(WorkTime));
+            }
+        }
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
+        public string Address
+        {
+            get => _address;
+            set
+            {
+                _address = value;
+                OnPropertyChanged(nameof(Address));
+            }
+        }
+
+        public virtual ICollection<City> Cities
+        {
+            get => _cities;
+            set
+            {
+                _cities = value;
+                OnPropertyChanged(nameof(Cities));
+            }
+        }
+        public virtual ICollection<Hall> Halls
+        {
+            get => _halls;
+            set
+            {
+                _halls = value;
+                OnPropertyChanged(nameof(Halls));
+            }
+        }
 
         public Cinema(TimeSpan workTime, string title, string address)
         {
@@ -25,6 +82,11 @@ namespace Poster.Model.DBModels
             Cities = new HashSet<City>();
             Halls = new HashSet<Hall>();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = " ") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public void Update(TimeSpan workTime, string title, string address)
         {
