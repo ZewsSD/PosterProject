@@ -14,14 +14,14 @@ namespace Poster.Model.DBModels
 
         public virtual ICollection<Ticket> Tickets { get; set; }
 
-        public User(string name, string surname, int phoneNumber)
-        {
-            Name = name;
-            Surname = surname;
-            PhoneNumber = phoneNumber;
+        //public User(string name, string surname, int phoneNumber)
+        //{
+        //    Name = name;
+        //    Surname = surname;
+        //    PhoneNumber = phoneNumber;
 
-            Tickets = new HashSet<Ticket>();
-        }
+        //    Tickets = new HashSet<Ticket>();
+        //}
 
         public void Update(string name, string surname, int phoneNumber)
         {

@@ -53,7 +53,7 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public City(string name, int cinemaId)
+        public City(string name, int? cinemaId)
         {
             Name = name;
             CinemaId = cinemaId;

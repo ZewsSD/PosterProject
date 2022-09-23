@@ -102,18 +102,18 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public Movie(string title, DateTime releaseDate, string producer, string description, double rating, byte[] picture)
-        {
-            Title = title;
-            ReleaseDate = releaseDate;
-            Producer = producer;
-            Description = description;
-            Rating = rating;
-            Picture = picture;
+        //public Movie(string title, DateTime releaseDate, string producer, string description, double rating, byte[] picture)
+        //{
+        //    Title = title;
+        //    ReleaseDate = releaseDate;
+        //    Producer = producer;
+        //    Description = description;
+        //    Rating = rating;
+        //    Picture = picture;
 
-            ActorMovies = new HashSet<ActorMovie>();
-            Sessions = new HashSet<Session>();
-        }
+        //    ActorMovies = new HashSet<ActorMovie>();
+        //    Sessions = new HashSet<Session>();
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
