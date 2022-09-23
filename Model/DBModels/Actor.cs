@@ -7,12 +7,12 @@ using System.Runtime.CompilerServices;
 
 namespace Poster.Model.DBModels
 {
-    public partial class Actor : IReadOnlyActor
+    public partial class Actor// : IReadOnlyActor
     {
         private int _id;
         private string _name;
         private string _surname;
-        private string _patronomic;
+        private string _patronymic;
         private ICollection<ActorMovie> _actorMovies;
 
         public int Id
@@ -44,10 +44,10 @@ namespace Poster.Model.DBModels
         }
         public string Patronymic
         {
-            get => _patronomic;
+            get => _patronymic;
             set
             {
-                _patronomic = value;
+                _patronymic = value;
                 OnPropertyChanged(nameof(Patronymic));
             }
         }
@@ -62,11 +62,11 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public Actor(string name, string surname, string patronomic)
+        public Actor(string name, string surname, string patronymic)
         {
             Name = name;
             Surname = surname;
-            Patronymic = patronomic;
+            Patronymic = patronymic;
 
             ActorMovies = new HashSet<ActorMovie>();
         }
@@ -76,14 +76,14 @@ namespace Poster.Model.DBModels
         public void OnPropertyChanged([CallerMemberName] string propertyName = " ") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        public void Update(string name, string surname, string patronomic)
+        public void Update(string name, string surname, string patronymic)
         {
             if (name != null)
                 Name = name;
             if (surname != null)
                 Surname = surname;
-            if (patronomic != null)
-                Patronymic = patronomic;
+            if (patronymic != null)
+                Patronymic = patronymic;
         }
     }
 

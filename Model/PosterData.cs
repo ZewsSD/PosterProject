@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Poster.Model
 {
@@ -52,11 +53,13 @@ namespace Poster.Model
             }
         }
 
-        public IReadOnlyList<IReadOnlyCity> GetAllCities()
+        public ObservableCollection</*IReadOnly*/City> GetAllCities()
         {
+
+
             using (PosterDbContext db = new PosterDbContext())
             {
-                return db.Cities.ToList();
+                return new ObservableCollection<City>(db.Cities.ToList());
             }
         }
 
@@ -72,7 +75,7 @@ namespace Poster.Model
         #region CRUD Cinema
         public void AddCinema(TimeSpan workTime, string title, string address)
         {
-            Cinema cinema = new Cinema(workTime, title, address);
+            Cinema cinema = new Cinema(/*workTime, title, address*/);
 
             using (PosterDbContext db = new PosterDbContext())
             {
@@ -108,11 +111,11 @@ namespace Poster.Model
             }
         }
 
-        public IReadOnlyList<IReadOnlyCinema> GetAllCinemas()
+        public ObservableCollection</*IReadOnly*/Cinema> GetAllCinemas()
         {
             using (PosterDbContext db = new PosterDbContext())
             {
-                return db.Cinemas.ToList();
+                return new ObservableCollection<Cinema>(db.Cinemas.ToList());
             }
         }
 
@@ -128,7 +131,7 @@ namespace Poster.Model
         #region CRUD Hall
         public void AddHall(int placesInLine, int cinemaId, int countLine)
         {
-            Hall hall = new Hall(placesInLine, cinemaId, countLine);
+            Hall hall = new Hall(/*placesInLine, cinemaId, countLine*/);
 
             using (PosterDbContext db = new PosterDbContext())
             {
@@ -184,7 +187,7 @@ namespace Poster.Model
         #region CRUD Session
         public void AddSession(DateTime date, int movieId, int hallId)
         {
-            Session session = new Session(date, movieId, hallId);
+            Session session = new Session(/*date, movieId, hallId*/);
 
             using (PosterDbContext db = new PosterDbContext())
             {
@@ -240,7 +243,7 @@ namespace Poster.Model
         #region CRUD Movie
         public void AddMovie(string title, DateTime releaseDate, string producer, string description, double rating, byte[] picture)
         {
-            Movie movie = new Movie(title, releaseDate, producer, description, rating, picture);
+            Movie movie = new Movie(/*title, releaseDate, producer, description, rating, picture*/);
 
             using (PosterDbContext db = new PosterDbContext())
             {
@@ -296,7 +299,7 @@ namespace Poster.Model
         #region CRUD Ticket
         public void AddTicket(int price, int line, int place, int userId, int sessionId)
         {
-            Ticket ticket = new Ticket(price, line, place, userId, sessionId);
+            Ticket ticket = new Ticket(/*price, line, place, userId, sessionId*/);
 
             using (PosterDbContext db = new PosterDbContext())
             {
@@ -352,7 +355,7 @@ namespace Poster.Model
         #region CRUD User
         public void AddUser(string name, string surname, int phoneNumber)
         {
-            User user = new User(name, surname, phoneNumber);
+            User user = new User(/*name, surname, phoneNumber*/);
 
             using(PosterDbContext db = new PosterDbContext())
             {
@@ -436,7 +439,7 @@ namespace Poster.Model
             }
         }
 
-        public IReadOnlyList<IReadOnlyActor> GetAllActors()
+        public IReadOnlyList</*IReadOnly*/Actor> GetAllActors()
         {
             using (PosterDbContext db = new PosterDbContext())
             {
@@ -444,7 +447,7 @@ namespace Poster.Model
             }
         }
 
-        public IReadOnlyActor GetActor(int id)
+        public /*IReadOnly*/Actor GetActor(int id)
         {
             using (PosterDbContext db = new PosterDbContext())
             {

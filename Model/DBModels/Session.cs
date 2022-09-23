@@ -82,14 +82,14 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public Session(DateTime date, int movieId, int hallId)
-        {
-            Date = date;
-            MovieId = movieId;
-            HallId = hallId;
+        //public Session(DateTime date, int movieId, int hallId)
+        //{
+        //    Date = date;
+        //    MovieId = movieId;
+        //    HallId = hallId;
 
-            Tickets = new HashSet<Ticket>();
-        }
+        //    Tickets = new HashSet<Ticket>();
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
