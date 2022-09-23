@@ -9,9 +9,9 @@
     <Grid>
         <StackPanel Margin="3">
             <TextBlock Text="Выбирите город" FontSize="20" Margin="3"/>
-            <ComboBox MinWidth="100" Margin="3"/>
+            <ComboBox MinWidth="100" Margin="3" ItemsSource="{Binding Cities}"/>
             <TextBlock Text="Выбирите город" FontSize="20" Margin="3"/>
-            <ComboBox MinWidth="100" Margin="3"/>
+            <ComboBox MinWidth="100" Margin="3" ItemsSource="{Binding Cinemas}"/>
             <Button Content="Подтвердить выбор" FontSize="20" Margin="3" Command="{Binding CreatePosterWindow}"/>
         </StackPanel>
     </Grid>

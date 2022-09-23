@@ -56,7 +56,7 @@ namespace Poster.ViewModel
         public PosterViewModel(Window window)
         {
             _window = window;
-            Movies = new ObservableCollection<IReadOnlyMovie>(_model.GetAllMovies());
+            Movies = null;//new ObservableCollection<IReadOnlyMovie>(_model.GetAllMovies());
             InputMovieData = null;
         }
 
