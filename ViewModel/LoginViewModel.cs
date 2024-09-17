@@ -1,4 +1,5 @@
-﻿using Poster.Model.Tools;
+﻿using Poster.Model;
+using Poster.Model.Tools;
 using Poster.View;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,15 @@ namespace Poster.ViewModel
 {
     class LoginViewModel : INotifyPropertyChanged
     {
+        private PosterData _model;
         private CommandTemplate _openAdminWindow;
         private CommandTemplate _openLoginUserWindow;
         private Window _window;
 
-        public LoginViewModel(Window window)
+        public LoginViewModel(Window window, PosterData model)
         {
             _window = window;
+            _model = model;
         }
 
         public CommandTemplate CreateLoginUserWindow
@@ -43,7 +46,7 @@ namespace Poster.ViewModel
         public void AddLoginUserWindow(object obj)
         {
             LoginUserWindow loginUserWindow = new LoginUserWindow();
-            LoginUserVeiwModel loginUserWindowViewModel = new LoginUserVeiwModel(loginUserWindow);
+            LoginUserVeiwModel loginUserWindowViewModel = new LoginUserVeiwModel(loginUserWindow, _model);
 
             _window.Hide();
 

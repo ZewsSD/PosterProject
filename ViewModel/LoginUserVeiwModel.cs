@@ -1,7 +1,10 @@
-﻿using Poster.Model.Tools;
+﻿using Poster.Model;
+using Poster.Model.DBModels;
+using Poster.Model.Tools;
 using Poster.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,11 +15,20 @@ namespace Poster.ViewModel
     class LoginUserVeiwModel : INotifyPropertyChanged
     {
         private CommandTemplate _openPosterWindow;
+        private CommandTemplate _getCities;
+        private PosterData _model;
         private Window _window;
 
-        public LoginUserVeiwModel(Window window)
+        public ObservableCollection</*IReadOnly*/City> Cities { get; private set; }
+        public ObservableCollection</*IReadOnly*/Cinema> Cinemas { get; private set; }
+
+
+        public LoginUserVeiwModel(Window window, PosterData model)
         {
             _window = window;
+            _model = model;
+            Cities = (ObservableCollection</*IReadOnly*/City>)_model.GetAllCities();
+            Cinemas = (ObservableCollection</*IReadOnly*/Cinema>)_model.GetAllCinemas();
         }
 
         public CommandTemplate CreatePosterWindow
@@ -28,6 +40,23 @@ namespace Poster.ViewModel
                 return _openPosterWindow;
             }
 
+        }
+
+        public CommandTemplate GetCities
+        {
+            get
+            {
+                if (_getCities == null)
+                {
+                    _getCities = new CommandTemplate(obj =>
+                    {
+
+                    }
+                    );
+                }
+
+                return _getCities;
+            }
         }
 
         public void AddPosterWindow(object obj)

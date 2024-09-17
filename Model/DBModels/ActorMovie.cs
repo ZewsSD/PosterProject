@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Poster.Model.DBModels
 {
-    public partial class ActorMovie : IReadOnlyActorMovie, INotifyPropertyChanged
+    public partial class ActorMovie : /*IReadOnlyActorMovie,*/ INotifyPropertyChanged
     {
         private int _id;
         private int? _actorId;
@@ -62,23 +62,23 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public ActorMovie(int actorId, int movieId)
-        {
-            ActorId = actorId;
-            MovieId = movieId;
-        }
+        //public ActorMovie(object actor_id, object movie_id)
+        //{
+        //    ActorId = (int?)actor_id;
+        //    MovieId = (int?)movie_id;
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string propertyName = " ") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        public void Update(int actorId, int movieId)
+        public void Update(int actor_id, int movie_id)
         {
-            if (actorId != -1)
-                ActorId = actorId;
-            if (movieId != -1)
-                MovieId = movieId;
+            if (actor_id != -1)
+                this.ActorId = actor_id;
+            if (movie_id != -1)
+                this.MovieId = movie_id;
         }
     }
 

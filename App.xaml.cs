@@ -1,4 +1,5 @@
-﻿using Poster.ViewModel;
+﻿using Poster.Model;
+using Poster.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,8 +17,9 @@ namespace Poster
     {
         private void AppStartup(object sender, StartupEventArgs e)
         {
+            PosterData model = new PosterData();
             LoginWindow window = new LoginWindow();
-            LoginViewModel viewModel = new LoginViewModel(window);
+            LoginViewModel viewModel = new LoginViewModel(window, model);
 
             window.Closing += viewModel.OnClosing;
 

@@ -73,15 +73,15 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public Cinema(TimeSpan workTime, string title, string address)
-        {
-            WorkTime = workTime;
-            Title = title;
-            Address = address;
+        //public Cinema(TimeSpan workTime, string title, string address)
+        //{
+        //    WorkTime = workTime;
+        //    Title = title;
+        //    Address = address;
 
-            Cities = new HashSet<City>();
-            Halls = new HashSet<Hall>();
-        }
+        //    Cities = new HashSet<City>();
+        //    Halls = new HashSet<Hall>();
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

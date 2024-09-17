@@ -72,14 +72,14 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public Hall(int placesInLine, int cinemaId, int countLine)
-        {
-            PlacesInLine = placesInLine;
-            CinemaId = cinemaId;
-            CountLine = countLine;
+        //public Hall(int placesInLine, int cinemaId, int countLine)
+        //{
+        //    PlacesInLine = placesInLine;
+        //    CinemaId = cinemaId;
+        //    CountLine = countLine;
 
-            Sessions = new HashSet<Session>();
-        }
+        //    Sessions = new HashSet<Session>();
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 

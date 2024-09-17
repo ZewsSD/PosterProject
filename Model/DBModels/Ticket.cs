@@ -92,14 +92,14 @@ namespace Poster.Model.DBModels
             }
         }
 
-        public Ticket(int price, int line, int place, int userId, int sessionId)
-        {
-            Price = price;
-            Line = line;
-            Place = place;
-            UserId = userId;
-            SessionId = sessionId;
-        }
+        //public Ticket(int price, int line, int place, int userId, int sessionId)
+        //{
+        //    Price = price;
+        //    Line = line;
+        //    Place = place;
+        //    UserId = userId;
+        //    SessionId = sessionId;
+        //}
 
         public event PropertyChangedEventHandler PropertyChanged;
 
