@@ -1,0 +1,77 @@
+﻿<Window x:Class="Poster.View.MovieWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Poster.View"
+        mc:Ignorable="d"
+        Title="MovieWindow" MinHeight="635"  MinWidth="800" MaxHeight="1000" MaxWidth="1000">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Image Source="{Binding Picture}" Grid.Row="0" Grid.Column="0" />
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" >
+            <TextBlock Text="{Binding Title}"   FontSize="50"/>
+            <Button Content="Оформить билет" HorizontalAlignment="Right" Margin="50 50 0 50" Command="{Binding CreateTicketWindow}"/>
+        </StackPanel>
+        <ListBox Grid.Row="1" Grid.ColumnSpan="2" >
+            <!-- <ToolBar/>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Halls}" FontSize="40"/>
+                        <TextBlock Text="{Binding Cinemas}" FontSize="40"/>
+                        <TextBlock Text=""/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            -->
+        </ListBox>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2"  Orientation="Vertical">
+            <TextBlock Text="О фильме" FontSize="35" HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" Margin="5"  >
+                <Label Content="Дата выхода фильма"  />
+                <TextBlock Text="{Binding ReleaseDate}" FontSize="15"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="5" >
+                <Label Content="Актёры" />
+                <ListBox Grid.Row="1" ItemsSource="{Binding Actors}"   MaxHeight="75" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock FontSize="15" Text="{Binding Name}"/>
+                                <TextBlock FontSize="15" Text="{Binding Surname}"/>
+                                <TextBlock FontSize="15" Text="{Binding Patronymic}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Продюсер" />
+                <TextBlock FontSize="15" Text="{Binding Producer}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Рейтинг" />
+                <TextBlock FontSize="15" Text="{Binding Rating}"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
